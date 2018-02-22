@@ -113,6 +113,8 @@ push_ignore 'options/window.manager.xml'
 push_ignore 'options/window.state.xml'
 push_ignore 'options/statistics.*.xml'
 push_ignore 'options/*.statistics.xml'
+push_ignore 'options/dimensions.xml'
+push_ignore 'options/options.xml'
 
 push_ignore 'javascript/nodejs/'
 
