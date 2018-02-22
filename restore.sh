@@ -10,8 +10,7 @@ cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 every_idea () {
 	local CFG=${4%/}
 	if [ "$CFG" = "$CONFIG_PATH" ]; then
-		# die "Yor $2 is running, you must close it before restore settings."
-		echo ""
+		die "Yor $2 is running, you must close it before restore settings."
 	fi
 }
 
