@@ -5,7 +5,14 @@ die () {
 	exit 1
 }
 
+OLD_PWD="$(pwd)"
 cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+if [ "${OLD_PWD}" = "$(pwd)" ]; then
+	MAYBE="can be"
+else
+	MAYBE="MUST be"
+fi
+
 if [ -h config ] || [ -e config ] ; then
 	die "config folder is exists, unlink it if you want change location."
 fi
@@ -37,10 +44,10 @@ if [ $? -eq 0 ]; then
 	echo ""
 fi
 
-echo "Where your idea config file (absolute path)? ${RUNNING_MSG}"
+echo "Where your idea config file ($MAYBE absolute path)? ${RUNNING_MSG}"
 read -p '> ' IDEA_CONFIG_PATH
 
-if [ "$((IDEA_CONFIG_PATH + 0))" -gt 0 ]; then # is a number, and gt 0
+if echo "$IDEA_CONFIG_PATH" | grep -qE "^[0-9]+$" &>/dev/null ; then # is a number, and gt 0
 	if [ -z "${CONFIG_LIST[$IDEA_CONFIG_PATH]}" ]; then
 		die "no this selection."
 	fi
@@ -58,6 +65,9 @@ elif [ -d "${IDEA_CONFIG_PATH}/" ]; then
 else
 	die "cannot find config in folder: ${IDEA_CONFIG_PATH}"
 fi
+
+realpath "$IDEA_CONFIG_PATH" >/dev/null || die "config folder not exists: $IDEA_CONFIG_PATH"
+IDEA_CONFIG_PATH="$(realpath "$IDEA_CONFIG_PATH")"
 
 echo ""
 
