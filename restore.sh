@@ -22,4 +22,5 @@ source ./lib/process.sh
 each_running every_idea
 
 echo "REPO -> config"
-rsync -aLKv --progress ./repo/. ./config --exclude .git --exclude .gitignore || die "cannot copy file from ./repo to ./config"
+rsync -aLKq --progress ./repo/. ./config --exclude .git --exclude .gitignore || die "cannot copy file from ./repo to ./config"
+
