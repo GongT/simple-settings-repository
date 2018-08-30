@@ -117,6 +117,7 @@ push_ignore 'options/dimensions.xml'
 push_ignore 'options/options.xml'
 
 push_ignore 'javascript/nodejs/'
+push_ignore '*.jar'
 
 echo ""
 echo "Complete!"
